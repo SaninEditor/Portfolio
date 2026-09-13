@@ -1,0 +1,275 @@
+/* ============================================================
+   Layout primitives
+   ============================================================ */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.wrap--narrow {
+  max-width: var(--wrap-narrow);
+}
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--col-gap);
+}
+
+/* ============================================================
+   Buttons / links
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  font-weight: 500;
+  letter-spacing: var(--tr-meta);
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 1.15em 1.7em;
+  border: 1px solid var(--line-2);
+  color: var(--ink-hi);
+  background: transparent;
+  transition:
+    background var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out),
+    border-color var(--dur-1) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn .btn-fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink-hi);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.btn:hover .btn-fill,
+.btn:focus-visible .btn-fill {
+  transform: scaleY(1);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  color: #050505;
+  border-color: var(--ink-hi);
+}
+
+.btn--ghost {
+  border: 0;
+  padding: 0;
+  color: var(--ink-2);
+}
+
+.btn--ghost:hover {
+  color: var(--ink-hi);
+}
+
+/* Simple text action with arrow — most common editorial action */
+.link-action {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55em;
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-hi);
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.link-action .arr {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-13);
+  transition: transform var(--dur-1) var(--ease-out);
+}
+
+.link-action:hover .arr,
+.link-action:focus-visible .arr {
+  transform: translate(3px, -3px);
+}
+
+/* Arrow that becomes a filled circle chip on hover — media blocks */
+.link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  letter-spacing: var(--tr-meta);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.link-chip .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4em;
+  height: 2.4em;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition:
+    background var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+
+.link-chip:hover .chip {
+  background: var(--ink-hi);
+  color: #000;
+  transform: rotate(0deg);
+}
+
+.link-chip:hover .chip .arr {
+  transform: translate(1px, -1px);
+}
+
+/* ============================================================
+   Section scaffolding
+   ============================================================ */
+
+.section {
+  padding-block: clamp(88px, 13vh, 168px);
+  position: relative;
+}
+
+.section--tight {
+  padding-block: clamp(56px, 8vh, 104px);
+}
+
+.section--flush-b {
+  padding-bottom: 0;
+}
+
+/* Top rule used across pages */
+.rule {
+  height: 1px;
+  background: var(--line-1);
+  border: 0;
+}
+
+/* Section heading row: mono label left, note right */
+.sec-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  margin-bottom: clamp(40px, 7vh, 88px);
+}
+
+.sec-head .idx {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
+}
+
+.sec-head .idx .n {
+  color: var(--ink-hi);
+}
+
+.sec-head .note {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+  color: var(--ink-mid);
+  line-height: 1.35;
+  max-width: 26ch;
+  text-align: right;
+}
+
+@media (max-width: 680px) {
+  .sec-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-4);
+  }
+  .sec-head .note {
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  .mast h1 {
+    font-size: clamp(1.9rem, 11.5vw, 2.7rem);
+  }
+}
+
+/* ============================================================
+   Page mastheads (interior pages)
+   ============================================================ */
+
+.mast {
+  padding-top: calc(var(--nav-h) + clamp(64px, 11vh, 130px));
+  padding-bottom: clamp(40px, 7vh, 90px);
+}
+
+.mast .kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-bottom: clamp(28px, 5vh, 56px);
+  color: var(--ink-lo);
+}
+
+.mast .kicker::before {
+  content: '';
+  width: 34px;
+  height: 1px;
+  background: var(--line-2);
+}
+
+.mast h1 {
+  font-weight: 700;
+  font-size: var(--d-lg);
+  letter-spacing: var(--tr-2);
+  line-height: 0.98;
+  text-transform: uppercase;
+  color: var(--ink-hi);
+  max-width: 16ch;
+}
+
+.mast h1 .it {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.mast .sub {
+  margin-top: clamp(24px, 4vh, 44px);
+  max-width: 58ch;
+  color: var(--ink-mid);
+  font-size: clamp(var(--fs-17), 1.4vw, var(--fs-19));
+  line-height: 1.65;
+}
+
+.mast .sub a {
+  color: var(--ink-hi);
+  border-bottom: 1px solid var(--line-2);
+  transition: border-color var(--dur-1);
+}
+
+.mast .sub a:hover {
+  border-color: var(--ink-hi);
+}
